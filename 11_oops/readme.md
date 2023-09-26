@@ -30,6 +30,7 @@ In really simple terms, an OOPS message is the computer’s shout for help, sayi
 
 Let's understand the oops message line by line
 
+```bash
 [ 1086.248952] BUG: unable to handle kernel NULL pointer dereference at 0000000000000012
 
 The above line indicates the BUG which caused the OOPS message, in our case invalid access to memory location
@@ -39,6 +40,7 @@ The above line indicates the BUG which caused the OOPS message, in our case inva
 Instruction Pointer at the time of OOPS
 
 [ 1086.248957] Oops: 0002 [#1] SMP
+```
 
 The error code value (0002) is in Hex. Each bit has a significance of its own.
 
@@ -56,11 +58,15 @@ Value:0  -> Kernel
 
 We have value 0002 which is Page not found during write operation in kernel mode.
 
+```bash
 [ 1086.248959] Modules linked in: test(POE+) snd_ens1371 coretemp snd_ac97_codec gameport ac97_bus snd_pcm crct10dif_pclmul snd_seq_midi crc32_pclmul snd_seq_midi_event vmw_balloon aesni_intel aes_x86_64 lrw gf128mul glue_helper ablk_helper cryptd snd_rawmidi input_leds vmwgfx joydev serio_raw btusb ttm drm_kms_helper btrtl btbcm btintel drm snd_seq snd_seq_device snd_timer fb_sys_fops snd vmw_vmci syscopyarea sysfillrect soundcore sysimgblt i2c_piix4 shpchp nfit rfcomm bnep bluetooth nfsd auth_rpcgss nfs_acl nfs lockd grace sunrpc fscache 8250_fintek parport_pc ppdev mac_hid lp parport hid_generic usbhid hid psmouse mptspi mptscsih mptbase e1000 pata_acpi scsi_transport_spi vmw_pvscsi floppy vmxnet3 fjes
+```
 
 The kernel doesn't necessarily know which module to blame, so it is giving you all of them.
 
+```bash
 [ 1086.248977] CPU: 0 PID: 4442 Comm: insmod Tainted: P           OE   4.4.0-31-generic #50~14.04.1-Ubuntu
+```
 
 CPU 0 denotes which CPU the error occurred. Next is PID and process name causing OOPS.
 
