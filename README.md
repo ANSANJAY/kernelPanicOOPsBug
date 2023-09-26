@@ -1,4 +1,4 @@
-```markdown
+
 # Kernel Panic, OOPs & Bug Examples Repository 🐞
 
 This repository is a collection of examples that demonstrate kernel panic, OOPs, BUG usages, and conditional compiling process in Linux kernel modules. Each subdirectory holds a different example, and they are easy to understand and implement.
@@ -21,5 +21,5 @@ Feel free to contribute to this project by creating issues or pull requests. We 
 - Always follow best practices while writing kernel modules to avoid system crashes and data corruption.
 
 Happy Learning & Coding! 🚀
-```
+
 
