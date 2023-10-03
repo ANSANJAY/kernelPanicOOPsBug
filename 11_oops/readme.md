@@ -1,15 +1,27 @@
 
-### 1. Explain the technical concept 📘
-In the Linux Kernel, the term "OOPS" refers to a deviation encountered during the execution of kernel code, analogous to a segmentation fault in user space. This deviation usually involves attempts to access invalid memory spaces, prompting the kernel to log an OOPS message. The kernel then performs crucial steps:
-   a. Terminating the offending process.
-   b. Generating debugging information to aid developers in identifying the cause.
-   c. Continuing execution; however, this leaves the system in a potentially unstable state, as not all structures or locks may be appropriately cleaned.
+# 1. OOPS 📘
+
+In the Linux Kernel, the term `OOPS` refers to a `deviation encountered during the execution of kernel code`, analogous to a segmentation fault in user space.
+- This deviation usually involves attempts 
+- to access invalid memory spaces
+- prompting the kernel to log an OOPS message. 
+
+The kernel then performs crucial steps:
+
+   a. `Terminating` the offending process.
+
+   b. Generating `debugging information` to aid developers in identifying the cause.
+
+   c. `Continuing execution`
+   
+    however, this leaves the system in a potentially unstable state, as not all structures or locks may be appropriately cleaned.
 
 The information contained within an OOPS message is meticulous and includes Processor Status, CPU Registers’ contents at the time of the exception, a Stack trace, and a Call Trace.
 
 In the illustrated code example, a deliberate attempt is made to access an invalid memory location, serving to generate an OOPS message and subsequently showcase the range and depth of the debugging information provided by such messages.
 
-### 2. Curious Questions 🧐
+# 2. Curious Questions 🧐
+
 #### Q: Can you describe the sequence of events following the generation of an OOPS message in the Linux kernel?
 **A:** The kernel will first terminate the process causing the OOPS. Subsequently, it will print detailed debugging information and will continue to execute other processes, albeit in a potentially compromised and unstable state due to possible inconsistencies in memory and process management.
 
@@ -19,7 +31,8 @@ In the illustrated code example, a deliberate attempt is made to access an inval
 #### Q: Why can't a system be trusted post-OOPS and what does the tainted flag signify?
 **A:** Post-OOPS, the system can't be completely trusted as some locks or structures may not be properly cleaned, leading to an unstable state. The tainted flag in an OOPS message, such as 'P', indicates specific system states or conditions like the loading of a proprietary module, which might have implications in understanding and analyzing the OOPS condition.
 
-### 3. Explain the concept in simple words 🌟
+# 3.Concept in simple words 🌟
+
 Imagine the Linux Kernel is like the brain 🧠 of your computer, and sometimes, it tries to do something it shouldn’t, like touching a hot stove 🔥. When this happens, it sends out an "OOPS Message," a bit like yelling, "Ouch! 🤕".
 
 This OOPS message is like a detailed note 📝 about what went wrong. It tells us what the brain was thinking, which part of the brain was involved, and what it was trying to do when it got hurt. It’s a snapshot 📸 of the brain’s situation when the mistake occurred!
