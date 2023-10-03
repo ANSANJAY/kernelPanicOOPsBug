@@ -1,8 +1,10 @@
 ### 1. Explain the technical concept 📘
-The `dump_stack()` function in Linux Kernel is a debugging aid, used to log the call stack of the CPU at a specific point in time. When `dump_stack()` is invoked, it prints a stack trace to the kernel log, which is usually accessible via the `dmesg` command or by examining the `/var/log/kern.log` file, depending on the system configuration.
+The `dump_stack()` function in Linux Kernel is a debugging aid, used to log the call stack of the CPU at a specific point in time. 
+-  When `dump_stack()` is invoked, it prints a stack trace to the kernel log, which is usually accessible via the `dmesg` command or by examining the `/var/log/kern.log` file, depending on the system configuration.
 
 In the provided kernel module:
-- The module starts its execution with `myinit` function where `dump_stack()` is called. This function will print the stack trace to the kernel log, between two log messages "dump_stack myinit" and "dump_stack after".
+- The module starts its execution with `myinit` function where `dump_stack()` is called. 
+- This function will print the stack trace to the kernel log, between two log messages "dump_stack myinit" and "dump_stack after".
 - The `myexit` function is defined to execute when the module is removed, simply logging "myexit".
 - `MODULE_LICENSE("GPL")` specifies the license as GPL (General Public License), which is required to inform the kernel about the nature of the module.
 
