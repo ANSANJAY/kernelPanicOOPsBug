@@ -1,5 +1,8 @@
-### 1. **Explain the Technical Concept**
-In Linux device drivers, `BUG_ON` and `WARN_ON` are frequently used macros that help in debugging by printing diagnostic information when a certain condition is met. These are especially abundant in the drivers' folder, being used thousands of times.
+# 1. **Bug Test**
+
+In Linux device drivers, `BUG_ON` and `WARN_ON` are frequently used macros that help in debugging by printing diagnostic information when a certain condition is met. 
+
+- These are especially abundant in the drivers' folder, being used thousands of times.
 
 - **BUG_ON(condition)**: This macro will cause a kernel oops if the condition is true, which will print the contents of the registers and the stack trace. 
 - It causes the current process to die. It is equivalent to writing:
@@ -9,13 +12,15 @@ if (condition)
     BUG();
 ```
 
-- **BUG() Macro**: When invoked, it prints the contents of the
+# **BUG() Macro**
+-  When invoked, it prints the contents of the
 
 -  registers
 - the stack trace
 - terminates the current process.
 
-- **WARN_ON() and WARN() Macro**: These are used to log unusual situations that developers should be aware of. When invoked, it prints the contents of the registers and the stack trace but does not kill the process. 
+- **WARN_ON() and WARN() Macro**
+- These are used to log unusual situations that developers should be aware of. When invoked, it prints the contents of the registers and the stack trace but does not kill the process. 
 
 In the provided example, the `test_bug_init` function will invoke a `BUG()` when the module is loaded, preventing unloading, and if attempted to unload, will give a "Module in use" error.
 
