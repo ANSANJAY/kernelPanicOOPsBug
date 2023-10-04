@@ -16,17 +16,23 @@ The kernel then performs crucial steps:
    
     however, this leaves the system in a potentially unstable state, as not all structures or locks may be appropriately cleaned.
 
-The information contained within an OOPS message is meticulous and includes Processor Status, CPU Registers’ contents at the time of the exception, a Stack trace, and a Call Trace.
+The information contained within an OOPS message is meticulous and includes `Processor Status, CPU Registers’ contents at the time of the exception, a Stack trace, and a Call Trace`.
 
 In the illustrated code example, a deliberate attempt is made to access an invalid memory location, serving to generate an OOPS message and subsequently showcase the range and depth of the debugging information provided by such messages.
 
 # 2. Curious Questions 🧐
 
 #### Q: Can you describe the sequence of events following the generation of an OOPS message in the Linux kernel?
-**A:** The kernel will first terminate the process causing the OOPS. Subsequently, it will print detailed debugging information and will continue to execute other processes, albeit in a potentially compromised and unstable state due to possible inconsistencies in memory and process management.
+**A:** The kernel will first terminate the process causing the OOPS.
+-  Subsequently, it will print detailed debugging information and will continue to execute other processes, albeit in a potentially compromised and unstable state due to possible inconsistencies in memory and process management.
 
 #### Q: How does an OOPS message aid in debugging?
-**A:** An OOPS message contains extensive information including the Processor Status, contents of the CPU Registers at the exception moment, a Stack Trace, and a Call Trace. This granular information allows developers to pinpoint the exact circumstances and sequence of events leading to the exception, facilitating a detailed analysis and resolution of the underlying issue.
+**A:** An OOPS message contains extensive information including the 
+- Processor Status
+- contents of the CPU Registers at the exception moment
+-  a Stack Trace, 
+- and a Call Trace. 
+- This granular information allows developers to pinpoint the exact circumstances and sequence of events leading to the exception, facilitating a detailed analysis and resolution of the underlying issue.
 
 #### Q: Why can't a system be trusted post-OOPS and what does the tainted flag signify?
 **A:** Post-OOPS, the system can't be completely trusted as some locks or structures may not be properly cleaned, leading to an unstable state. The tainted flag in an OOPS message, such as 'P', indicates specific system states or conditions like the loading of a proprietary module, which might have implications in understanding and analyzing the OOPS condition.
@@ -81,9 +87,10 @@ The kernel doesn't necessarily know which module to blame, so it is giving you a
 [ 1086.248977] CPU: 0 PID: 4442 Comm: insmod Tainted: P           OE   4.4.0-31-generic #50~14.04.1-Ubuntu
 ```
 
-CPU 0 denotes which CPU the error occurred. Next is PID and process name causing OOPS.
+`CPU 0 ` denotes which CPU the error occurred. Next is`PID` and `process name` causing OOPS.
 
-The tainted flag points to 'P' here. Each flag has its own meaning. A few other flags, and their meanings, picked up from kernel/panic.c :
+The tainted flag points to `'P'` here. 
+- Each flag has its own meaning. A few other flags, and their meanings, picked up from kernel/panic.c :
 
 ```C
  *  print_tainted - return a string to represent the kernel taint state.
@@ -110,10 +117,13 @@ The tainted flag points to 'P' here. Each flag has its own meaning. A few other 
 
 ```bash
 [ 1086.248979] RIP: 0010:[<ffffffffc03de01e>]  [<ffffffffc03de01e>] test_oops_init+0x1e/0x30 [test]
+```
 
-RIP is the CPU register containing the address of the instruction that is getting executed. 0x0010 comes from the code segment register.  test_oops_init+0x1e/0x30 is the symbol + offset/length.
+RIP is the CPU register containing the address of the instruction that is getting executed.
+-  0x0010 comes from the code segment register.  
+- test_oops_init+0x1e/0x30 is the symbol + offset/length.
 
-
+```bash
 [ 1086.248981] RSP: 0018:ffff8802144e7cc0  EFLAGS: 00010292
 [ 1086.248981] RAX: 0000000000000017 RBX: ffffffff81c13080 RCX: 0000000000000000
 [ 1086.248982] RDX: 0000000000000001 RSI: ffff880236e0dc78 RDI: ffff880236e0dc78
@@ -123,16 +133,20 @@ RIP is the CPU register containing the address of the instruction that is gettin
 [ 1086.248984] FS:  00007f13440e9740(0000) GS:ffff880236e00000(0000) knlGS:0000000000000000
 [ 1086.248986] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [ 1086.248987] CR2: 0000000000000012 CR3: 00000002255ad000 CR4: 00000000000406f0
+```
 
 Dump of the contents of the CPU Registers.
 
+```bash
 [ 1086.249006] Stack:
 [ 1086.249007]  ffff8802144e7d38 ffffffff8100213d ffff8802144e7eb0 ffff8802144e7d10
 [ 1086.249008]  0000000000000246 0000000000000002 ffffffff811dbf1d ffff880236803c00
 [ 1086.249009]  ffffffff81180f87 0000000000000018 000000001136cd17 ffffffffc03e0000
+```
 
 The above is the stack trace
 
+```bash
 [ 1086.249011] Call Trace:
 [ 1086.249019]  [<ffffffff8100213d>] do_one_initcall+0xcd/0x1f0
 [ 1086.249025]  [<ffffffff811dbf1d>] ? kmem_cache_alloc_trace+0x1ad/0x220
@@ -144,7 +158,6 @@ The above is the stack trace
 [ 1086.249038]  [<ffffffff81102afe>] SYSC_finit_module+0x7e/0xa0
 [ 1086.249039]  [<ffffffff81102b3e>] SyS_finit_module+0xe/0x10
 [ 1086.249045]  [<ffffffff817f6f36>] entry_SYSCALL_64_fastpath+0x16/0x75
-
 ```
 
 The above is the call trace - list of the functions being called just before the OOPS message.
@@ -187,5 +200,5 @@ Here’s a summarized review and additional explanations:
 ### 10. **Code Line**
 - This is a hex-dump of the machine code that was being executed when the OOPS occurred, allowing developers to inspect the actual instructions that led to the fault.
 
-### Conclusion
+# Conclusion
 Understanding each line of an OOPS message is crucial for debugging kernel errors as it provides an exhaustive snapshot of the system’s state, the loaded modules, the sequence of function calls, and the state of the CPU and memory at the time of the error. This comprehensive data is indispensable for developers and system administrators in identifying, isolating, and fixing the underlying causes of kernel OOPS messages.
