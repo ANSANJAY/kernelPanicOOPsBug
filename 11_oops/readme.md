@@ -1,7 +1,8 @@
 
 # 1. OOPS 📘
 
-In the Linux Kernel, the term `OOPS` refers to a `deviation encountered during the execution of kernel code`, analogous to a segmentation fault in user space.
+In the Linux Kernel, the term 
+- `OOPS` refers to a `deviation encountered during the execution of kernel code`, analogous to a segmentation fault in user space.
 - This deviation usually involves attempts 
 - to access invalid memory spaces
 - prompting the kernel to log an OOPS message. 
